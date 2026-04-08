@@ -102,3 +102,21 @@
   display: none;
 }
 .contact-item:hover .del-btn { display: block; color: #e74c3c; }
+.skeleton-item { pointer-events: none; }
+.skeleton {
+  background: linear-gradient(90deg, #f0f2f5 25%, #e4e6e9 50%, #f0f2f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+.skeleton-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.skeleton-line { height: 12px; width: 100%; }
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

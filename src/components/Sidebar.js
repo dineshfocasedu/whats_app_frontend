@@ -5,12 +5,16 @@ import './Sidebar.css';
 export default function Sidebar({ activePhone, onSelect }) {
   const [contacts, setContacts] = useState([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+
   const fetchContacts = async (q = '') => {
     try {
       const { data } = await getContacts(q);
       setContacts(data);
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,7 +52,17 @@ export default function Sidebar({ activePhone, onSelect }) {
       </div>
 
       <div className="contact-list">
-        {contacts.length === 0 ? (
+        {loading ? (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="contact-item skeleton-item">
+              <div className="skeleton skeleton-avatar" />
+              <div className="contact-info">
+                <div className="skeleton skeleton-line" style={{ width: '55%' }} />
+                <div className="skeleton skeleton-line" style={{ width: '80%', marginTop: 6 }} />
+              </div>
+            </div>
+          ))
+        ) : contacts.length === 0 ? (
           <div className="empty-list">
             {search ? 'No results found' : 'No chats found'}
           </div>

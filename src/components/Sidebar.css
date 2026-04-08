@@ -1,0 +1,104 @@
+.sidebar {
+  width: 320px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-right: 1px solid #e9edef;
+}
+.sidebar-header {
+  padding: 12px 16px;
+  background: #075E54;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-avatar {
+  background: #128C7E !important;
+  font-size: 16px !important;
+}
+.header-title { flex: 1; font-size: 16px; font-weight: 500; }
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f0f2f5;
+  border-bottom: 1px solid #e9edef;
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+  color: #111;
+}
+.contact-list { flex: 1; overflow-y: auto; }
+.empty-list {
+  padding: 40px 16px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f2f5;
+  transition: background 0.15s;
+}
+.contact-item:hover { background: #f5f6f6; }
+.contact-item.active { background: #f0f2f5; }
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+}
+.contact-info { flex: 1; min-width: 0; }
+.contact-name { font-size: 15px; font-weight: 500; color: #111; }
+.contact-preview {
+  font-size: 13px;
+  color: #667781;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.msg-count {
+  font-size: 11px;
+  background: #25D366;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 8px;
+  min-width: 20px;
+  text-align: center;
+}
+.del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: #ccc;
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: none;
+}
+.contact-item:hover .del-btn { display: block; color: #e74c3c; }

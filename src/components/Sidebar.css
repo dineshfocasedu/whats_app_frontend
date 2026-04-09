@@ -19,6 +19,22 @@
   font-size: 16px !important;
 }
 .header-title { flex: 1; font-size: 16px; font-weight: 500; }
+.upload-btn {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  border-radius: 14px;
+  font-size: 12px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  user-select: none;
+}
+.upload-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.upload-btn.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.upload-btn input { display: none; }
 .search-box {
   display: flex;
   align-items: center;

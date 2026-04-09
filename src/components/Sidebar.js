@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getContacts, deleteChat } from '../services/api';
+import { getContacts, deleteChat, uploadChats } from '../services/api';
 import './Sidebar.css';
 
-export default function Sidebar({ activePhone, onSelect }) {
+export default function Sidebar({ activePhone, onSelect, onImported }) {
   const [contacts, setContacts] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
   const fetchContacts = async (q = '') => {
     try {
@@ -32,11 +33,48 @@ export default function Sidebar({ activePhone, onSelect }) {
     fetchContacts(search);
   };
 
+  const handleUpload = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+
+    try {
+      setUploading(true);
+      const { data } = await uploadChats(files);
+      await fetchContacts(search);
+
+      if (typeof onImported === 'function') {
+        onImported();
+      }
+
+      window.alert(
+        `Imported chats: ${data.importedChats}\nUploaded files: ${data.uploadedFiles}\nSkipped files: ${data.skippedFiles}`
+      );
+    } catch (err) {
+      console.error(err);
+      window.alert('Failed to upload chat files.');
+    } finally {
+      setUploading(false);
+      e.target.value = '';
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <div className="avatar header-avatar">W</div>
         <span className="header-title">WATI Chats</span>
+        <label className={`upload-btn${uploading ? ' disabled' : ''}`} title="Upload chat files">
+          <input
+            type="file"
+            multiple
+            accept=".json,.txt,application/json,text/plain"
+            onChange={handleUpload}
+            disabled={uploading}
+            webkitdirectory=""
+            directory=""
+          />
+          {uploading ? 'Importing...' : 'Import'}
+        </label>
       </div>
 
       <div className="search-box">

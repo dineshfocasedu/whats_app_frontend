@@ -56,6 +56,7 @@ export default function ChatWindow({ phone, onBack }) {
       <div className="legend">
         <span><span className="dot user-dot" /> User (incoming)</span>
         <span><span className="dot bot-dot" /> Bot / Agent (outgoing)</span>
+        <span><span className="dot api-dot" /> API Triggered</span>
         <span><span className="dot sys-dot" /> System</span>
       </div>
 
@@ -77,6 +78,20 @@ export default function ChatWindow({ phone, onBack }) {
                 <div className="bubble system-bubble">
                   {msg.text}
                   <span className="time">{timeOnly}</span>
+                </div>
+              </div>
+            );
+          }
+
+          if (msg.type === 'api') {
+            return (
+              <div key={i} className="msg-row api">
+                <div className="bubble-wrap">
+                  <div className="sender-label api">{msg.sender || 'API'}</div>
+                  <div className="bubble api-bubble">
+                    <span className="bubble-text">{msg.text}</span>
+                    <span className="time">{timeOnly}</span>
+                  </div>
                 </div>
               </div>
             );
